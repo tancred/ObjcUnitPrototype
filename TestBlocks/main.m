@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <objc/objc-runtime.h>
+
 
 @interface TestSuite : NSObject
 //@property(copy) id (^suiteSetup)(void);
@@ -20,12 +22,23 @@
 + (NSArray *)collectSuites;
 @end
 
+
+@interface TestCollector : NSObject
+@property(strong) NSArray *testSuites;
+- (void)collectTestSuites;
+@end
+
+
+@interface MyTest : TestSuite
+@end
+
+
 int main(int argc, const char * argv[])
 {
 	@autoreleasepool {
 		// Test suite class: instance with setup and tear down blocks; set or array with test blocks
 		//   (if) setup returns fixture object, passed to test and tear down blocks
-		//   suite can have setup and tear down blocks run once for suite too.
+		//   suite can have setup and tear down blocks run once for suite too. (Suite fixture passed to tests too? Always use varargs args for test blocks?)
 		//   named test blocks.
 		// Assertion methods (or blocks?)
 	    // Test collector: find all test suite classes, report all test names (and setup tear down?)
@@ -37,10 +50,64 @@ int main(int argc, const char * argv[])
 		//   Catch exceptions and report
 		//   Report results
 		// How do we handle crashes? How do we find out what thread crashed and is it even interesting?
-	    NSLog(@"Hello, World!");
+		TestCollector *collector = [[TestCollector alloc] init];
+		[collector collectTestSuites];
+		NSLog(@"collected test suites: %@", [collector.testSuites valueForKey:@"name"]);
 	}
     return 0;
 }
+
+
+@implementation MyTest
++ (NSArray *)collectSuites {
+	MyTest *suite = [[MyTest alloc] init];
+	return @[suite];
+}
+
+@end
+
+
+@implementation TestCollector
+
+static BOOL IsKindOfClass(Class who, Class kind) {
+	if (!who) return NO;
+	if (!kind) return class_getSuperclass(who) == Nil;
+	Class cls = who;
+	while (cls != Nil) {
+		if (cls == kind) { NSLog(@"%@ is subclass of %@", NSStringFromClass(who), NSStringFromClass(kind)); return YES; }
+		cls = class_getSuperclass(cls);
+	}
+	return NO;
+}
+
+static BOOL IsSubclassOf(Class who, Class super) {
+	if (!who) return NO;
+	if (!super) return class_getSuperclass(who) == Nil;
+	Class cls = who;
+	while ((cls = class_getSuperclass(cls)) != Nil) {
+		if (cls == super) { NSLog(@"%@ is subclass of %@", NSStringFromClass(who), NSStringFromClass(super)); return YES; }
+	}
+	return NO;
+}
+
+- (void)collectTestSuites {
+	NSMutableArray *collected = [NSMutableArray array];
+	unsigned int count = 0;
+	Class *classes = objc_copyClassList(&count);
+	for (unsigned int i=0; i<count; i++) {
+		Class cls = classes[i];
+		if (IsSubclassOf(cls, [TestSuite class])) {
+			NSArray *suites = [cls collectSuites];
+			if (!suites || [suites count] == 0) {
+				NSLog(@"No suites from %@", NSStringFromClass(cls));
+			}
+			if (suites) [collected addObjectsFromArray:suites];
+		}
+	}
+	self.testSuites = collected;
+}
+
+@end
 
 
 @implementation TestSuite
