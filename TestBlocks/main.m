@@ -21,6 +21,16 @@
 @property(strong,readonly) NSMutableDictionary *tests;
 - (void)add:(NSString *)testName test:(void (^)(id))testCase;
 + (NSArray *)collectSuites;
+
+// assertions
++ (void)assertInt:(int)actual equals:(int)expected;
++ (void)assertNSUInteger:(NSUInteger)actual equals:(NSUInteger)expected;
++ (void)assert:(id)actual equals:(id)expected;
++ (void)assert:(id)actual sameAs:(id)expected;
+@end
+
+
+@interface AssertionFailure : NSException
 @end
 
 
@@ -96,6 +106,9 @@ int main(int argc, const char * argv[])
 			for (int x = 0; x<100000000; x++) { int y=x*x; y--; }
 		}];
 	}
+	[suite add:@"seq test that will fail" test:^(id fixture) {
+		[TestSuite assertInt:3 equals:4];
+	}];
 	return @[suite];
 }
 @end
@@ -180,6 +193,7 @@ int main(int argc, const char * argv[])
 
 @end
 
+
 @implementation TestCollector
 
 static BOOL IsKindOfClass(Class who, Class kind) {
@@ -241,4 +255,38 @@ static BOOL IsSubclassOf(Class who, Class super) {
 	return @[];
 }
 
++ (void)assertInt:(int)actual equals:(int)expected {
+	if (actual == expected) return;
+	[self failExpected:[NSString stringWithFormat:@"%d",expected] actual:[NSString stringWithFormat:@"%d",actual]];
+}
+
++ (void)assertNSUInteger:(NSUInteger)actual equals:(NSUInteger)expected {
+	if (actual == expected) return;
+	[self failExpected:[NSString stringWithFormat:@"%lu",expected] actual:[NSString stringWithFormat:@"%lu",actual]];
+}
+
++ (void)assert:(id)actual equals:(id)expected {
+	if (!expected) [self fail:@"expecting nil should use -assertNil:"]; // error, not fail!
+	if (!actual) [self failExpected:[expected description] actual:@"nil"];
+	if ([actual isEqual:expected] && [expected isEqual:actual]) return;
+	[self failExpected:[expected description] actual:[actual description]];
+}
+
++ (void)assert:(id)actual sameAs:(id)expected {
+	if (actual == expected) return;
+	[self failExpected:[expected description] actual:[actual description]];
+}
+
++ (void)failExpected:(NSString *)expected actual:(NSString *)actual {
+	[self fail:[NSString stringWithFormat:@"expected %@ but got %@", expected, actual]];
+}
+
++ (void)fail:(NSString *)msg {
+	[AssertionFailure raise:@"AssertionFailure" format:@"%@", msg];
+}
+
+@end
+
+
+@implementation AssertionFailure
 @end
