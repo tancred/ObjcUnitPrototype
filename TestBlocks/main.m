@@ -17,6 +17,7 @@
 @property(copy) id (^setup)(void);
 @property(copy) void (^tearDown)(id);
 @property(assign) BOOL runTestsSequentially;
+@property(assign) BOOL runSuiteSequentially;
 @property(strong,readonly) NSMutableDictionary *tests;
 - (void)add:(NSString *)testName test:(void (^)(id))testCase;
 + (NSArray *)collectSuites;
@@ -89,6 +90,7 @@ int main(int argc, const char * argv[])
 + (NSArray *)collectSuites {
 	Sequential *suite = [[Sequential alloc] init];
 	suite.runTestsSequentially = YES;
+	suite.runSuiteSequentially = YES;
 	for (int i=0; i<10; i++) {
 		[suite add:[NSString stringWithFormat:@"otest%d", i] test:^(id fixture) {
 			for (int x = 0; x<100000000; x++) { int y=x*x; y--; }
@@ -113,6 +115,10 @@ int main(int argc, const char * argv[])
 	for (TestSuite *each in testSuites) {
 		[self runTestSuite:each];
 	}
+	[self waitForTestsToFinish];
+}
+
+- (void)waitForTestsToFinish {
 	[self.serial waitUntilAllOperationsAreFinished];
 	[self.parallel waitUntilAllOperationsAreFinished];
 }
@@ -120,6 +126,7 @@ int main(int argc, const char * argv[])
 - (void)runTestSuite:(TestSuite *)aSuite {
 	@autoreleasepool {
 		NSLog(@"Running test suite %@ sequantially %@", aSuite.name, aSuite.runTestsSequentially ? @"YES" : @"NO");
+		if (aSuite.runSuiteSequentially) [self waitForTestsToFinish];
 		[aSuite.tests enumerateKeysAndObjectsUsingBlock:^(id testName, void (^test)(id), BOOL *stop) {
 			NSLog(@"Scheduling %@-%@", aSuite.name, testName);
 			NSOperation *testOp = [NSBlockOperation blockOperationWithBlock:^{
@@ -167,6 +174,7 @@ int main(int argc, const char * argv[])
 			NSOperationQueue *q = aSuite.runTestsSequentially ? self.serial : self.parallel;
 			[q addOperation:testOp];
 		}];
+		if (aSuite.runSuiteSequentially) [self waitForTestsToFinish];
 	}
 }
 
