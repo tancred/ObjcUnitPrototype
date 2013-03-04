@@ -29,7 +29,9 @@
 @end
 
 
-@interface MyTest : TestSuite
+@interface TestRunner : NSObject
+- (void)runTests:(NSArray *)testSuites;
+- (void)runTestSuite:(TestSuite *)aSuite;
 @end
 
 
@@ -43,7 +45,8 @@ int main(int argc, const char * argv[])
 		// Assertion methods (or blocks?)
 	    // Test collector: find all test suite classes, report all test names (and setup tear down?)
 		// Test runner:
-		//   Run set in parallell, run array in serial
+		//   Run in parallell by default, run sequentially on request
+		//   Run tests suite by suite?
 		//   Specify in suite if run in separate processes
 		//   Option to run everything serially
 		//   Option to run each test in separate process or all in same
@@ -53,19 +56,114 @@ int main(int argc, const char * argv[])
 		TestCollector *collector = [[TestCollector alloc] init];
 		[collector collectTestSuites];
 		NSLog(@"collected test suites: %@", [collector.testSuites valueForKey:@"name"]);
+
+		TestRunner *runner = [[TestRunner alloc] init];
+		[runner runTests:collector.testSuites];
+
+		// exit when done (but doesn't wait for the parallel tests though)
+		dispatch_async(dispatch_get_main_queue(), ^{
+			NSLog(@"exiting");
+			exit(0);
+		});
+
+		dispatch_main();
 	}
     return 0;
 }
 
 
-@implementation MyTest
+@interface Parallel : TestSuite
+@end
+@implementation Parallel
 + (NSArray *)collectSuites {
-	MyTest *suite = [[MyTest alloc] init];
+	Parallel *suite = [[Parallel alloc] init];
+	for (int i=0; i<20; i++) {
+		[suite add:[NSString stringWithFormat:@"test%d", i] test:^(id fixture) {
+			for (int x = 0; x<100000000; x++) { int y=x*x; y--; }
+		}];
+	}
 	return @[suite];
+}
+@end
+
+
+@interface Sequential : TestSuite
+@end
+@implementation Sequential
++ (NSArray *)collectSuites {
+	Sequential *suite = [[Sequential alloc] init];
+	suite.runTestsSequentially = YES;
+	for (int i=0; i<10; i++) {
+		[suite add:[NSString stringWithFormat:@"otest%d", i] test:^(id fixture) {
+			for (int x = 0; x<100000000; x++) { int y=x*x; y--; }
+		}];
+	}
+	return @[suite];
+}
+@end
+
+
+@implementation TestRunner
+
+- (void)runTests:(NSArray *)testSuites {
+	for (TestSuite *each in testSuites) {
+		[self runTestSuite:each];
+	}
+}
+
+- (void)runTestSuite:(TestSuite *)aSuite {
+	@autoreleasepool {
+		NSLog(@"Running test suite %@ sequantially %@", aSuite.name, aSuite.runTestsSequentially ? @"YES" : @"NO");
+		dispatch_queue_t queue = aSuite.runTestsSequentially ? dispatch_get_main_queue() : dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+		[aSuite.tests enumerateKeysAndObjectsUsingBlock:^(id testName, void (^test)(id), BOOL *stop) {
+			NSLog(@"Scheduling %@-%@", aSuite.name, testName);
+			dispatch_async(queue, ^{
+				@autoreleasepool {
+					id fixture = nil;
+					id setupFailure = nil;
+					id testFailure = nil;
+					id tearDownFailure = nil;
+
+					@try {
+						if (aSuite.setup) {
+							NSLog(@"%@-%@: setup", aSuite.name, testName);
+							fixture = aSuite.setup();
+						}
+					}
+					@catch (NSException *exception) {
+						setupFailure = exception;
+					}
+
+					@try {
+						if (!setupFailure) {
+							NSLog(@"%@-%@: test", aSuite.name, testName);
+							test(fixture);
+						}
+					}
+					@catch (NSException *exception) {
+						testFailure = exception;
+					}
+
+					@try {
+						if (aSuite.tearDown) {
+							NSLog(@"%@-%@: tear down", aSuite.name, testName);
+							aSuite.tearDown(fixture);
+						}
+					}
+					@catch (NSException *exception) {
+						tearDownFailure = exception;
+					}
+					if (setupFailure) NSLog(@"%@-%@: setup failed: %@", aSuite.name, testName, setupFailure);
+					if (testFailure) NSLog(@"%@-%@: test failed: %@", aSuite.name, testName, testFailure);
+					if (tearDownFailure) NSLog(@"%@-%@: tear down failed: %@", aSuite.name, testName, tearDownFailure);
+					NSLog(@"%@-%@: test finished", aSuite.name, testName);
+				}
+			});
+		}];
+	}
 }
 
 @end
-
 
 @implementation TestCollector
 
