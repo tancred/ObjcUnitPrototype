@@ -217,6 +217,7 @@ static BOOL IsSubclassOf(Class who, Class super) {
 			if (suites) [collected addObjectsFromArray:suites];
 		}
 	}
+	free(classes);
 	self.testSuites = collected;
 }
 
