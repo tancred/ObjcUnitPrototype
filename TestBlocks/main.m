@@ -30,6 +30,8 @@
 
 
 @interface TestRunner : NSObject
+@property(strong) NSOperationQueue *parallel;
+@property(strong) NSOperationQueue *serial;
 - (void)runTests:(NSArray *)testSuites;
 - (void)runTestSuite:(TestSuite *)aSuite;
 @end
@@ -60,13 +62,7 @@ int main(int argc, const char * argv[])
 		TestRunner *runner = [[TestRunner alloc] init];
 		[runner runTests:collector.testSuites];
 
-		// exit when done (but doesn't wait for the parallel tests though)
-		dispatch_async(dispatch_get_main_queue(), ^{
-			NSLog(@"exiting");
-			exit(0);
-		});
-
-		dispatch_main();
+		// exit status = test result status
 	}
     return 0;
 }
@@ -105,19 +101,28 @@ int main(int argc, const char * argv[])
 
 @implementation TestRunner
 
+- (id)init {
+	if (!(self = [super init])) return nil;
+	self.parallel = [[NSOperationQueue alloc] init];
+	self.serial = [[NSOperationQueue alloc] init];
+	self.serial.maxConcurrentOperationCount = 1;
+	return self;
+}
+
 - (void)runTests:(NSArray *)testSuites {
 	for (TestSuite *each in testSuites) {
 		[self runTestSuite:each];
 	}
+	[self.serial waitUntilAllOperationsAreFinished];
+	[self.parallel waitUntilAllOperationsAreFinished];
 }
 
 - (void)runTestSuite:(TestSuite *)aSuite {
 	@autoreleasepool {
 		NSLog(@"Running test suite %@ sequantially %@", aSuite.name, aSuite.runTestsSequentially ? @"YES" : @"NO");
-		dispatch_queue_t queue = aSuite.runTestsSequentially ? dispatch_get_main_queue() : dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 		[aSuite.tests enumerateKeysAndObjectsUsingBlock:^(id testName, void (^test)(id), BOOL *stop) {
 			NSLog(@"Scheduling %@-%@", aSuite.name, testName);
-			dispatch_async(queue, ^{
+			NSOperation *testOp = [NSBlockOperation blockOperationWithBlock:^{
 				@autoreleasepool {
 					id fixture = nil;
 					id setupFailure = nil;
@@ -158,7 +163,9 @@ int main(int argc, const char * argv[])
 					if (tearDownFailure) NSLog(@"%@-%@: tear down failed: %@", aSuite.name, testName, tearDownFailure);
 					NSLog(@"%@-%@: test finished", aSuite.name, testName);
 				}
-			});
+			}];
+			NSOperationQueue *q = aSuite.runTestsSequentially ? self.serial : self.parallel;
+			[q addOperation:testOp];
 		}];
 	}
 }
