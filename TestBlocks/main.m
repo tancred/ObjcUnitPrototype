@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <objc/objc-runtime.h>
+#import <inttypes.h>
 
 
 @interface TestSuite : NSObject
@@ -24,7 +25,14 @@
 
 // assertions
 + (void)assertInt:(int)actual equals:(int)expected;
++ (void)assertUint64:(uint64_t)actual equals:(uint64_t)expected;
++ (void)assertUint32:(uint32_t)actual equals:(uint32_t)expected;
++ (void)assertUint16:(uint16_t)actual equals:(uint16_t)expected;
++ (void)assertUint8:(uint8_t)actual equals:(uint8_t)expected;
 + (void)assertNSUInteger:(NSUInteger)actual equals:(NSUInteger)expected;
+
++ (void)assertNil:(id)actual;
++ (void)assertNothing:(id)actual;
 + (void)assert:(id)actual equals:(id)expected;
 + (void)assert:(id)actual sameAs:(id)expected;
 @end
@@ -260,9 +268,39 @@ static BOOL IsSubclassOf(Class who, Class super) {
 	[self failExpected:[NSString stringWithFormat:@"%d",expected] actual:[NSString stringWithFormat:@"%d",actual]];
 }
 
++ (void)assertUint64:(uint64_t)actual equals:(uint64_t)expected {
+	if (actual == expected) return;
+	[self failExpected:[NSString stringWithFormat:@"%"PRIu64,expected] actual:[NSString stringWithFormat:@"%"PRIu64,actual]];
+}
+
++ (void)assertUint32:(uint32_t)actual equals:(uint32_t)expected {
+	if (actual == expected) return;
+	[self failExpected:[NSString stringWithFormat:@"%"PRIu32,expected] actual:[NSString stringWithFormat:@"%"PRIu32,actual]];
+}
+
++ (void)assertUint16:(uint16_t)actual equals:(uint16_t)expected {
+	if (actual == expected) return;
+	[self failExpected:[NSString stringWithFormat:@"%"PRIu16,expected] actual:[NSString stringWithFormat:@"%"PRIu16,actual]];
+}
+
++ (void)assertUint8:(uint8_t)actual equals:(uint8_t)expected {
+	if (actual == expected) return;
+	[self failExpected:[NSString stringWithFormat:@"%"PRIu8,expected] actual:[NSString stringWithFormat:@"%"PRIu8,actual]];
+}
+
 + (void)assertNSUInteger:(NSUInteger)actual equals:(NSUInteger)expected {
 	if (actual == expected) return;
 	[self failExpected:[NSString stringWithFormat:@"%lu",expected] actual:[NSString stringWithFormat:@"%lu",actual]];
+}
+
++ (void)assertNil:(id)actual {
+	if (!actual) return;
+	[self fail:[NSString stringWithFormat:@"expected nil but got %@", [actual description]]];
+}
+
++ (void)assertNothing:(id)actual {
+	if (!actual || actual == [NSNull null]) return;
+	[self fail:[NSString stringWithFormat:@"expected nothing but got %@", [actual description]]];
 }
 
 + (void)assert:(id)actual equals:(id)expected {
