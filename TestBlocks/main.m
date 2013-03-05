@@ -115,7 +115,7 @@ int main(int argc, const char * argv[])
 		}];
 	}
 	[suite add:@"seq test that will fail" test:^(id fixture) {
-		[TestSuite assertInt:3 equals:4];
+		[self assertInt:3 equals:4];
 	}];
 	return @[suite];
 }
