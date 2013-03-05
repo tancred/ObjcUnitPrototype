@@ -15,11 +15,11 @@
 //@property(copy) void (^suiteTearDown)(id);
 @property(copy) NSString *name;
 @property(copy) id (^setup)(void);
-@property(copy) void (^tearDown)(id);
+@property(copy) void (^tearDown)(id fixture);
 @property(assign) BOOL runTestsSequentially;
 @property(assign) BOOL runSuiteSequentially;
 @property(strong,readonly) NSMutableDictionary *tests;
-- (void)add:(NSString *)testName test:(void (^)(id))testCase;
+- (void)add:(NSString *)testName test:(void (^)(id fixture))testCase;
 + (NSArray *)collectSuites;
 
 // assertions
