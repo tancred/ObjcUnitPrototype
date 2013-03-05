@@ -73,7 +73,7 @@ int main(int argc, const char * argv[])
 		//   Specify in suite if run in separate processes
 		//   Option to run everything serially
 		//   Option to run each test in separate process or all in same
-		//   Catch exceptions and report
+		//   Catch exceptions and report; failure on AssertionFailure, error on everything else.
 		//   Report results
 		// How do we handle crashes? How do we find out what thread crashed and is it even interesting?
 		TestCollector *collector = [[TestCollector alloc] init];
