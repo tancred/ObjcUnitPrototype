@@ -22,7 +22,9 @@
 @property(strong,readonly) NSMutableDictionary *tests;
 - (void)add:(NSString *)testName test:(void (^)(id fixture))testCase;
 + (NSArray *)collectSuites;
+@end
 
+@interface TestSuite (Assertions)
 // assertions
 + (void)assertInt:(int)actual equals:(int)expected;
 + (void)assertUint64:(uint64_t)actual equals:(uint64_t)expected;
@@ -119,6 +121,7 @@ int main(int argc, const char * argv[])
 	}];
 	return @[suite];
 }
+
 @end
 
 
@@ -262,6 +265,11 @@ static BOOL IsSubclassOf(Class who, Class super) {
 + (NSArray *)collectSuites {
 	return @[];
 }
+
+@end
+
+
+@implementation TestSuite (Assertions)
 
 + (void)assertInt:(int)actual equals:(int)expected {
 	if (actual == expected) return;
