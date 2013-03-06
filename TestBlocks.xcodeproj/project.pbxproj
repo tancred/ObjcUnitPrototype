@@ -15,6 +15,9 @@
 		E95E331F16E7167D003C6D37 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95E331116E71644003C6D37 /* Foundation.framework */; };
 		E95E332216E717D1003C6D37 /* ObjcUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95E330B16E71644003C6D37 /* ObjcUnit.framework */; };
 		E95E332316E71843003C6D37 /* ObjcUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = E95E331916E71644003C6D37 /* ObjcUnit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E95E332916E71A03003C6D37 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E90245DD16E007CF008CCBC7 /* Foundation.framework */; };
+		E95E332C16E71A03003C6D37 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E95E332B16E71A03003C6D37 /* main.m */; };
+		E95E333016E71A03003C6D37 /* unittester.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = E95E332F16E71A03003C6D37 /* unittester.1 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +41,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		E95E332616E71A03003C6D37 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				E95E333016E71A03003C6D37 /* unittester.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +69,10 @@
 		E95E331816E71644003C6D37 /* ObjcUnit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjcUnit-Prefix.pch"; sourceTree = "<group>"; };
 		E95E331916E71644003C6D37 /* ObjcUnit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcUnit.h; sourceTree = "<group>"; };
 		E95E331A16E71644003C6D37 /* ObjcUnit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjcUnit.m; sourceTree = "<group>"; };
+		E95E332816E71A03003C6D37 /* unittester */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = unittester; sourceTree = BUILT_PRODUCTS_DIR; };
+		E95E332B16E71A03003C6D37 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E95E332E16E71A03003C6D37 /* unittester-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "unittester-Prefix.pch"; sourceTree = "<group>"; };
+		E95E332F16E71A03003C6D37 /* unittester.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = unittester.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +93,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E95E332516E71A03003C6D37 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E95E332916E71A03003C6D37 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -84,6 +109,7 @@
 			children = (
 				E90245DF16E007CF008CCBC7 /* TestBlocks */,
 				E95E331216E71644003C6D37 /* ObjcUnit */,
+				E95E332A16E71A03003C6D37 /* unittester */,
 				E90245DC16E007CF008CCBC7 /* Frameworks */,
 				E90245DB16E007CF008CCBC7 /* Products */,
 			);
@@ -94,6 +120,7 @@
 			children = (
 				E90245DA16E007CF008CCBC7 /* TestBlocks */,
 				E95E330B16E71644003C6D37 /* ObjcUnit.framework */,
+				E95E332816E71A03003C6D37 /* unittester */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -156,6 +183,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E95E332A16E71A03003C6D37 /* unittester */ = {
+			isa = PBXGroup;
+			children = (
+				E95E332B16E71A03003C6D37 /* main.m */,
+				E95E332F16E71A03003C6D37 /* unittester.1 */,
+				E95E332D16E71A03003C6D37 /* Supporting Files */,
+			);
+			path = unittester;
+			sourceTree = "<group>";
+		};
+		E95E332D16E71A03003C6D37 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E95E332E16E71A03003C6D37 /* unittester-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -206,6 +251,23 @@
 			productReference = E95E330B16E71644003C6D37 /* ObjcUnit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		E95E332716E71A03003C6D37 /* unittester */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E95E333116E71A03003C6D37 /* Build configuration list for PBXNativeTarget "unittester" */;
+			buildPhases = (
+				E95E332416E71A03003C6D37 /* Sources */,
+				E95E332516E71A03003C6D37 /* Frameworks */,
+				E95E332616E71A03003C6D37 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = unittester;
+			productName = unittester;
+			productReference = E95E332816E71A03003C6D37 /* unittester */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -229,6 +291,7 @@
 			targets = (
 				E90245D916E007CF008CCBC7 /* TestBlocks */,
 				E95E330A16E71644003C6D37 /* ObjcUnit */,
+				E95E332716E71A03003C6D37 /* unittester */,
 			);
 		};
 /* End PBXProject section */
@@ -258,6 +321,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E95E331B16E71644003C6D37 /* ObjcUnit.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E95E332416E71A03003C6D37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E95E332C16E71A03003C6D37 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +461,24 @@
 			};
 			name = Release;
 		};
+		E95E333216E71A03003C6D37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "unittester/unittester-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E95E333316E71A03003C6D37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "unittester/unittester-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -416,6 +505,14 @@
 			buildConfigurations = (
 				E95E331C16E71644003C6D37 /* Debug */,
 				E95E331D16E71644003C6D37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E95E333116E71A03003C6D37 /* Build configuration list for PBXNativeTarget "unittester" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E95E333216E71A03003C6D37 /* Debug */,
+				E95E333316E71A03003C6D37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

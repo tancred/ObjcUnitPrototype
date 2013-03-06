@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'unittester' target in the 'unittester' project
+//
+
+#ifdef __OBJC__
+	#import <Foundation/Foundation.h>
+#endif
