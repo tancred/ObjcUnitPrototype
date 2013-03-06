@@ -17,8 +17,8 @@
 		E95E332916E71A03003C6D37 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E90245DD16E007CF008CCBC7 /* Foundation.framework */; };
 		E95E332C16E71A03003C6D37 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E95E332B16E71A03003C6D37 /* main.m */; };
 		E95E333616E71F2A003C6D37 /* ObjcUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95E330B16E71644003C6D37 /* ObjcUnit.framework */; };
-		E95E333D16E71FAE003C6D37 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95E333C16E71FAE003C6D37 /* CoreFoundation.framework */; };
 		E95E334316E71FAE003C6D37 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E95E334116E71FAE003C6D37 /* InfoPlist.strings */; };
+		E95E335116E72180003C6D37 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95E331116E71644003C6D37 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +36,20 @@
 			remoteGlobalIDString = E95E330A16E71644003C6D37;
 			remoteInfo = ObjcUnit;
 		};
+		E95E334D16E7214D003C6D37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E90245D216E007CF008CCBC7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E95E332716E71A03003C6D37;
+			remoteInfo = unittester;
+		};
+		E95E334F16E7214D003C6D37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E90245D216E007CF008CCBC7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E95E333A16E71FAE003C6D37;
+			remoteInfo = EmptyBundle;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +59,6 @@
 		E90245E316E007CF008CCBC7 /* TestBlocks-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestBlocks-Prefix.pch"; sourceTree = "<group>"; };
 		E90245E416E007CF008CCBC7 /* TestBlocks.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestBlocks.1; sourceTree = "<group>"; };
 		E95E330B16E71644003C6D37 /* ObjcUnit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjcUnit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E95E330C16E71644003C6D37 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E95E330F16E71644003C6D37 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		E95E331016E71644003C6D37 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E95E331116E71644003C6D37 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -59,7 +72,6 @@
 		E95E332E16E71A03003C6D37 /* unittester-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "unittester-Prefix.pch"; sourceTree = "<group>"; };
 		E95E332F16E71A03003C6D37 /* unittester.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = unittester.1; sourceTree = "<group>"; };
 		E95E333B16E71FAE003C6D37 /* EmptyBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmptyBundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		E95E333C16E71FAE003C6D37 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		E95E334016E71FAE003C6D37 /* EmptyBundle-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EmptyBundle-Info.plist"; sourceTree = "<group>"; };
 		E95E334216E71FAE003C6D37 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E95E334416E71FAE003C6D37 /* EmptyBundle-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EmptyBundle-Prefix.pch"; sourceTree = "<group>"; };
@@ -96,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E95E333D16E71FAE003C6D37 /* CoreFoundation.framework in Frameworks */,
+				E95E335116E72180003C6D37 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,8 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				E90245DD16E007CF008CCBC7 /* Foundation.framework */,
-				E95E330C16E71644003C6D37 /* Cocoa.framework */,
-				E95E333C16E71FAE003C6D37 /* CoreFoundation.framework */,
 				E95E330E16E71644003C6D37 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -242,6 +252,24 @@
 		};
 /* End PBXHeadersBuildPhase section */
 
+/* Begin PBXLegacyTarget section */
+		E95E334916E72140003C6D37 /* TestUnittesterTool */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = E95E334A16E72140003C6D37 /* Build configuration list for PBXLegacyTarget "TestUnittesterTool" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			dependencies = (
+				E95E334E16E7214D003C6D37 /* PBXTargetDependency */,
+				E95E335016E7214D003C6D37 /* PBXTargetDependency */,
+			);
+			name = TestUnittesterTool;
+			passBuildSettingsInEnvironment = 1;
+			productName = TestUnittesterTool;
+		};
+/* End PBXLegacyTarget section */
+
 /* Begin PBXNativeTarget section */
 		E90245D916E007CF008CCBC7 /* TestBlocks */ = {
 			isa = PBXNativeTarget;
@@ -337,6 +365,7 @@
 				E95E330A16E71644003C6D37 /* ObjcUnit */,
 				E95E332716E71A03003C6D37 /* unittester */,
 				E95E333A16E71FAE003C6D37 /* EmptyBundle */,
+				E95E334916E72140003C6D37 /* TestUnittesterTool */,
 			);
 		};
 /* End PBXProject section */
@@ -404,6 +433,16 @@
 			isa = PBXTargetDependency;
 			target = E95E330A16E71644003C6D37 /* ObjcUnit */;
 			targetProxy = E95E333416E71F15003C6D37 /* PBXContainerItemProxy */;
+		};
+		E95E334E16E7214D003C6D37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E95E332716E71A03003C6D37 /* unittester */;
+			targetProxy = E95E334D16E7214D003C6D37 /* PBXContainerItemProxy */;
+		};
+		E95E335016E7214D003C6D37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E95E333A16E71FAE003C6D37 /* EmptyBundle */;
+			targetProxy = E95E334F16E7214D003C6D37 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -558,7 +597,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EmptyBundle/EmptyBundle-Prefix.pch";
-				INFOPLIST_FILE = "EmptyBundle/EmptyBundle-Info.plist";
+				INFOPLIST_FILE = "Bundles/EmptyBundle/EmptyBundle-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
@@ -571,10 +610,31 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EmptyBundle/EmptyBundle-Prefix.pch";
-				INFOPLIST_FILE = "EmptyBundle/EmptyBundle-Info.plist";
+				INFOPLIST_FILE = "Bundles/EmptyBundle/EmptyBundle-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		E95E334B16E72140003C6D37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUGGING_SYMBOLS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E95E334C16E72140003C6D37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -620,6 +680,14 @@
 			buildConfigurations = (
 				E95E334616E71FAE003C6D37 /* Debug */,
 				E95E334716E71FAE003C6D37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E95E334A16E72140003C6D37 /* Build configuration list for PBXLegacyTarget "TestUnittesterTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E95E334B16E72140003C6D37 /* Debug */,
+				E95E334C16E72140003C6D37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
