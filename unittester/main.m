@@ -28,14 +28,12 @@ int main(int argc, const char * argv[])
 			DieUsage([NSString stringWithFormat:@"error loading bundle at path %@: %@", bundlePath, [error localizedDescription]]);
 		}
 
-		/*
 		TestCollector *collector = [[TestCollector alloc] init];
 		[collector collectTestSuites];
 		NSLog(@"collected test suites: %@", [collector.testSuites valueForKey:@"name"]);
 		
 		TestRunner *runner = [[TestRunner alloc] init];
 		[runner runTests:collector.testSuites];
-		 */
 	}
     return 0;
 }
