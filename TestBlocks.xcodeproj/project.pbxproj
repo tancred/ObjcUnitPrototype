@@ -109,7 +109,7 @@
 				E90245DF16E007CF008CCBC7 /* TestBlocks */,
 				E95E331216E71644003C6D37 /* ObjcUnit */,
 				E95E332A16E71A03003C6D37 /* unittester */,
-				E95E333E16E71FAE003C6D37 /* EmptyBundle */,
+				E95E334816E7203E003C6D37 /* Bundles */,
 				E90245DC16E007CF008CCBC7 /* Frameworks */,
 				E90245DB16E007CF008CCBC7 /* Products */,
 			);
@@ -219,6 +219,14 @@
 				E95E334416E71FAE003C6D37 /* EmptyBundle-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E95E334816E7203E003C6D37 /* Bundles */ = {
+			isa = PBXGroup;
+			children = (
+				E95E333E16E71FAE003C6D37 /* EmptyBundle */,
+			);
+			path = Bundles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
