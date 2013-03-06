@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		E90245DE16E007CF008CCBC7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E90245DD16E007CF008CCBC7 /* Foundation.framework */; };
 		E90245E116E007CF008CCBC7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E90245E016E007CF008CCBC7 /* main.m */; };
-		E90245E516E007CF008CCBC7 /* TestBlocks.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = E90245E416E007CF008CCBC7 /* TestBlocks.1 */; };
 		E95E331716E71644003C6D37 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E95E331516E71644003C6D37 /* InfoPlist.strings */; };
 		E95E331B16E71644003C6D37 /* ObjcUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = E95E331A16E71644003C6D37 /* ObjcUnit.m */; };
 		E95E331F16E7167D003C6D37 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95E331116E71644003C6D37 /* Foundation.framework */; };
@@ -17,7 +16,7 @@
 		E95E332316E71843003C6D37 /* ObjcUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = E95E331916E71644003C6D37 /* ObjcUnit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E95E332916E71A03003C6D37 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E90245DD16E007CF008CCBC7 /* Foundation.framework */; };
 		E95E332C16E71A03003C6D37 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E95E332B16E71A03003C6D37 /* main.m */; };
-		E95E333016E71A03003C6D37 /* unittester.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = E95E332F16E71A03003C6D37 /* unittester.1 */; };
+		E95E333616E71F2A003C6D37 /* ObjcUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95E330B16E71644003C6D37 /* ObjcUnit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,30 +27,14 @@
 			remoteGlobalIDString = E95E330A16E71644003C6D37;
 			remoteInfo = ObjcUnit;
 		};
+		E95E333416E71F15003C6D37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E90245D216E007CF008CCBC7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E95E330A16E71644003C6D37;
+			remoteInfo = ObjcUnit;
+		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		E90245D816E007CF008CCBC7 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-				E90245E516E007CF008CCBC7 /* TestBlocks.1 in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		E95E332616E71A03003C6D37 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-				E95E333016E71A03003C6D37 /* unittester.1 in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E90245DA16E007CF008CCBC7 /* TestBlocks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestBlocks; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +81,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E95E332916E71A03003C6D37 /* Foundation.framework in Frameworks */,
+				E95E333616E71F2A003C6D37 /* ObjcUnit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,7 +205,6 @@
 			buildPhases = (
 				E90245D616E007CF008CCBC7 /* Sources */,
 				E90245D716E007CF008CCBC7 /* Frameworks */,
-				E90245D816E007CF008CCBC7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -257,11 +240,11 @@
 			buildPhases = (
 				E95E332416E71A03003C6D37 /* Sources */,
 				E95E332516E71A03003C6D37 /* Frameworks */,
-				E95E332616E71A03003C6D37 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E95E333516E71F15003C6D37 /* PBXTargetDependency */,
 			);
 			name = unittester;
 			productName = unittester;
@@ -339,6 +322,11 @@
 			isa = PBXTargetDependency;
 			target = E95E330A16E71644003C6D37 /* ObjcUnit */;
 			targetProxy = E95E332016E717C9003C6D37 /* PBXContainerItemProxy */;
+		};
+		E95E333516E71F15003C6D37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E95E330A16E71644003C6D37 /* ObjcUnit */;
+			targetProxy = E95E333416E71F15003C6D37 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
