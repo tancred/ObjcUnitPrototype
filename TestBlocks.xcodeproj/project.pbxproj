@@ -260,6 +260,7 @@
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "$(PROJECT_DIR)/TestUnittesterTool";
 			dependencies = (
 				E95E334E16E7214D003C6D37 /* PBXTargetDependency */,
 				E95E335016E7214D003C6D37 /* PBXTargetDependency */,
