@@ -92,6 +92,7 @@
 		E90245E316E007CF008CCBC7 /* TestBlocks-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestBlocks-Prefix.pch"; sourceTree = "<group>"; };
 		E90245E416E007CF008CCBC7 /* TestBlocks.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestBlocks.1; sourceTree = "<group>"; };
 		E90FB4CD16E85B8E00108B7A /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		E90FB4E016E8665C00108B7A /* rts.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = rts.sh; sourceTree = "<group>"; };
 		E95E330B16E71644003C6D37 /* ObjcUnit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjcUnit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E95E330F16E71644003C6D37 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		E95E331016E71644003C6D37 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -221,6 +222,7 @@
 		E90FB4CC16E85B8E00108B7A /* TestUnittesterTool */ = {
 			isa = PBXGroup;
 			children = (
+				E90FB4E016E8665C00108B7A /* rts.sh */,
 				E90FB4CD16E85B8E00108B7A /* Makefile */,
 			);
 			path = TestUnittesterTool;
@@ -337,11 +339,11 @@
 /* Begin PBXLegacyTarget section */
 		E95E334916E72140003C6D37 /* TestUnittesterTool */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = "$(ACTION)";
+			buildArgumentsString = "rts.sh $(ACTION)";
 			buildConfigurationList = E95E334A16E72140003C6D37 /* Build configuration list for PBXLegacyTarget "TestUnittesterTool" */;
 			buildPhases = (
 			);
-			buildToolPath = /usr/bin/make;
+			buildToolPath = /bin/sh;
 			buildWorkingDirectory = "$(PROJECT_DIR)/TestUnittesterTool";
 			dependencies = (
 				E95E334E16E7214D003C6D37 /* PBXTargetDependency */,
